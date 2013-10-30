@@ -4,7 +4,6 @@
 *.swp
 *.rbc
 .rake_tasks~
-bin/
 *.pyc
 .idea/
 _trial_temp/
