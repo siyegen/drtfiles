@@ -1,0 +1,32 @@
+#!/bin/sh
+
+DOTFILES_DIR=~/.drtfiles
+
+for file in $DOTFILES_DIR/*; do
+  filename=`basename $file`
+  dest=~/.$filename
+  if [ -e $dest ]; then
+    echo "removing existing $dest"
+    rm $dest
+  fi
+
+  ln -s $file $dest
+  echo "linking $file -> $dest"
+done
+
+# set up vundle
+#vundledir=~/.vim/bundle/vundle
+#if [ ! -e $vundledir ]; then
+#  git clone git://github.com/gmarik/vundle.git $vundledir
+#fi
+#
+## set up zsh-syntax-highlighting
+#zshhighlight=~/.zsh/vendor/zsh-syntax-highlighting
+#if [ ! -e $zshhighlight ]; then
+#  git clone git://github.com/zsh-users/zsh-syntax-highlighting.git $zshhighlight
+#fi
+#
+#tmuxifier=~/.tmuxifier
+#if [ ! -e $tmuxifier ]; then
+#  git clone https://github.com/jimeh/tmuxifier.git $tmuxifier
+#fi

@@ -1,0 +1,29 @@
+#!/bin/zsh
+
+DRTFILES_DIR=~/.drtfiles
+
+# symlink *.drt files to ~/
+for file in $(find "$DRTFILES_DIR" -name '*.drt'); do
+	filename=`basename "$file"`
+	dest=~/."${filename%.*}"
+	if [ -e $dest ]; then
+    	echo "removing existing $dest"
+    	rm $dest
+  fi
+	
+	ln -s $file $dest
+	echo "linked $filename => $dest"
+done
+
+# set up vundle
+vundledir=~/.vim/bundle/vundle
+if [ ! -e $vundledir ]; then
+	git clone git://github.com/gmarik/vundle.git $vundledir
+fi
+
+# Check for .zprezto, git clone if not
+zprezto_dir="${ZDOTDIR:-$HOME}/.zprezto"
+if [ ! -e $zprezto_dir ]; then
+	echo "Cloning zprezto => $zprezto_dir"
+	git clone --recursive https://github.com/sorin-ionescu/prezto.git $zprezto_dir
+fi
