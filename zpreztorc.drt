@@ -33,6 +33,7 @@ zstyle ':prezto:load' pmodule \
   'utility' \
   'completion' \
   'git' \
+  'syntax-highlighting' \
   'prompt'
 
 #
@@ -79,14 +80,6 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 # Set the Pacman frontend.
 # zstyle ':prezto:module:pacman' frontend 'yaourt'
 
-#
-# Prompt
-#
-
-# Set the prompt theme to load.
-# Setting it to 'random' loads a random theme.
-# Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'sorin'
 
 #
 # Screen
@@ -103,7 +96,7 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 #
 
 # Set the SSH identities to load into the agent.
-# zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa2' 'id_github'
+zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa2' 'id_github'
 
 #
 # Syntax Highlighting
@@ -121,10 +114,19 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
 #
 # Set syntax highlighting styles.
 zstyle ':prezto:module:syntax-highlighting' styles \
-  'builtin' 'bg=blue' \
-  'command' 'bg=blue' \
-  'function' 'bg=blue'
+  'builtin' 'fg=green' \
+  'command' 'fg=yellow' \
+  'function' 'fg=red'
 #
+
+#
+# Prompt
+#
+
+# Set the prompt theme to load.
+# Setting it to 'random' loads a random theme.
+# Auto set to 'off' on dumb terminals.
+zstyle ':prezto:module:prompt' theme 'sorin'
 
 #
 # Terminal
