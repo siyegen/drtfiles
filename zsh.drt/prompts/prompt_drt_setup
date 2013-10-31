@@ -20,13 +20,16 @@ function prompt_drt_pwd {
     _prompt_drt_pwd="$MATCH"
     unset MATCH
   else
-    _prompt_drt_pwd="$MATCH"
+    _prompt_drt_pwd="$pwd"
   fi
 }
 
 function prompt_drt_precmd {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
+
+  sep=''
+  rsep=''
 
   # Format PWD.
   prompt_drt_pwd
@@ -35,6 +38,10 @@ function prompt_drt_precmd {
   if (( $+functions[git-info] )); then
     git-info
   fi
+}
+
+function comp_info {
+  echo -n "%K{black}%F{blue} %n %f%k%K{blue}%F{black}$sep%f%k"
 }
 
 function prompt_drt_setup {
@@ -49,31 +56,26 @@ function prompt_drt_setup {
   add-zsh-hook precmd prompt_drt_precmd
 
   # Set git-info parameters.
-  zstyle ':prezto:module:git:info' verbose 'yes'
-  zstyle ':prezto:module:git:info:action' format ':%%B%F{yellow}%s%f%%b'
-  zstyle ':prezto:module:git:info:added' format ' %%B%F{green}✚%f%%b'
-  zstyle ':prezto:module:git:info:ahead' format ' %%B%F{yellow}⬆%f%%b'
-  zstyle ':prezto:module:git:info:behind' format ' %%B%F{yellow}⬇%f%%b'
-  zstyle ':prezto:module:git:info:branch' format ':%F{green}%b%f'
-  zstyle ':prezto:module:git:info:commit' format ':%F{green}%.7c%f'
-  zstyle ':prezto:module:git:info:deleted' format ' %%B%F{red}✖%f%%b'
-  zstyle ':prezto:module:git:info:modified' format ' %%B%F{blue}✱%f%%b'
-  zstyle ':prezto:module:git:info:position' format ':%F{red}%p%f'
-  zstyle ':prezto:module:git:info:renamed' format ' %%B%F{magenta}➜%f%%b'
-  zstyle ':prezto:module:git:info:stashed' format ' %%B%F{cyan}✭%f%%b'
-  zstyle ':prezto:module:git:info:unmerged' format ' %%B%F{yellow}═%f%%b'
-  zstyle ':prezto:module:git:info:untracked' format ' %%B%F{white}◼%f%%b'
+  zstyle ':prezto:module:git:info:action' format '! %s'
+  zstyle ':prezto:module:git:info:added' format '✚'
+  zstyle ':prezto:module:git:info:ahead' format '⬆'
+  zstyle ':prezto:module:git:info:behind' format '⬇'
+  zstyle ':prezto:module:git:info:branch' format '⭠ %b'
+  zstyle ':prezto:module:git:info:commit' format '➦ %.7c'
+  zstyle ':prezto:module:git:info:deleted' format '✖'
+  zstyle ':prezto:module:git:info:modified' format '✱'
+  zstyle ':prezto:module:git:info:position' format '%p'
+  zstyle ':prezto:module:git:info:renamed' format '➙'
+  zstyle ':prezto:module:git:info:stashed' format 's'
+  zstyle ':prezto:module:git:info:unmerged' format '═'
+  zstyle ':prezto:module:git:info:untracked' format '?'
   zstyle ':prezto:module:git:info:keys' format \
-    'prompt' ' %F{black}git%f$(coalesce "%b" "%p" "%c")%s' \
-    'rprompt' '%A%B%S%a%d%m%r%U%u'
+    'prompt' '%K{green}%F{blue}%f%F{black}$(coalesce "%b" "%p" "%c")%s%f%k%F{green}%f' \
+    'status' ' %A%B%S%a%d%m%r%U%u'
 
   # Define prompts.
-  local sep=''
-  local rsep=''
-  PROMPT='%K{blue}%F{black} %m %f%k%F{blue}%f%F{yellow} ${_prompt_drt_pwd} %f%K{yellow}%F{black}%f%F{black} ${git_info:+${(e)git_info[prompt]}} %f%k%F{yellow}%f'
-  #PROMPT='%F{cyan}${_prompt_drt_pwd}%f${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.) '
-  RPROMPT='%F{white}%D{%L:%M:%S %p} %f'
-  #RPROMPT='%K{blue}%F{white}[%D]%f%k%F{blue}${rsep}%f'
+  PROMPT='$(comp_info)%K{blue}%F{black}${_prompt_drt_pwd}%f ${git_info:+${(e)git_info[prompt]}}'
+  RPROMPT='%F{white}[%D{%L:%M:%S %p}]%f%F{yellow}@%m%f'
   SPROMPT='zsh: correct %F{red}%R%f to %F{blue}%r%f [nyae]? '
 }
 
