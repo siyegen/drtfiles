@@ -70,8 +70,8 @@ function prompt_drt_setup {
   zstyle ':prezto:module:git:info:unmerged' format '═'
   zstyle ':prezto:module:git:info:untracked' format '?'
   zstyle ':prezto:module:git:info:keys' format \
-    'prompt' '%K{green}%F{blue}%f%F{black}$(coalesce "%b" "%p" "%c")%s%f%k%F{green}%f' \
-    'status' ' %A%B%S%a%d%m%r%U%u'
+    'prompt' '%K{green}%F{blue}%f%F{black}$(coalesce "%b" "%p" "%c")%s%A%B%S%a%d%m%r%U%u%f%k%F{green}%f' \
+    #'status' ' %A%B%S%a%d%m%r%U%u'
 
   # Define prompts.
   PROMPT='$(comp_info)%K{blue}%F{black}${_prompt_drt_pwd}%f ${git_info:+${(e)git_info[prompt]}}'
