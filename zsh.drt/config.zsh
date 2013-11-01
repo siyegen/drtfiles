@@ -1,6 +1,3 @@
-fpath=(${ZDOTDIR:-$HOME}/.zsh/prompts $fpath)
-autoload -Uz promptinit && promptinit
-
 # Zsh history
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
