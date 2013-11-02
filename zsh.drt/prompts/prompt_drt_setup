@@ -35,7 +35,7 @@ function prompt_drt_precmd {
 }
 
 function comp_info {
-  echo -n "%K{black}%F{blue} %n %f%k%K{blue}%F{black}$sep%f%k"
+  echo -n "%K{black}%F{blue}%n %f%k%K{blue}%F{black}$sep%f%k"
 }
 
 function prompt_drt_setup {
