@@ -144,6 +144,9 @@ set background=light
 colorscheme candycodex
 au FileType javascript call JavaScriptFold()
 
+" ================ Syntastic =======================
+let g:syntastic_javascript_checkers = ['jshint']
+
 let g:scala_sort_across_groups=1
 
 let g:airline_powerline_fonts = 1

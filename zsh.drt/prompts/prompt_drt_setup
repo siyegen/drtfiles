@@ -3,10 +3,6 @@
 #
 # Authors:
 #   David Tomberlin
-#   Based on:
-#     Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-# Screenshots:
 #
 #
 
@@ -14,14 +10,7 @@
 pmodload 'helper'
 
 function prompt_drt_pwd {
-  local pwd="${PWD/#$HOME/~}"
-
-  if [[ "$pwd" == (#m)[/~] ]]; then
-    _prompt_drt_pwd="$MATCH"
-    unset MATCH
-  else
-    _prompt_drt_pwd="$pwd"
-  fi
+  _prompt_drt_pwd="${PWD/#$HOME/~}"
 }
 
 function prompt_drt_precmd {
