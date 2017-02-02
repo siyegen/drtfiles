@@ -47,3 +47,8 @@
 
 [format]
   pretty = format:%C(yellow)%h%Creset -%C(bold blue)%d%Creset %s %Cgreen(%ar) %C(magenta)<%an>%Creset
+[credential]
+	helper = osxkeychain
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/

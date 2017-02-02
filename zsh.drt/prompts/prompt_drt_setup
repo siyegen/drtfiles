@@ -9,23 +9,21 @@
 # Load dependencies.
 pmodload 'helper'
 
-SEP='\uE0B0'
-RSEP='\uE0B2'
-
 function prompt_drt_precmd {
   vcs_info
 }
 
 function comp_info {
-  echo -n "%K{black}%F{blue}%n %f%k%K{blue}%F{black}$SEP%f%k"
+  echo -n "%F{white}%n %f"
 }
 
 function prompt_drt_pwd {
-  echo -n "%K{blue}%F{black}${PWD/#$HOME/~}%f%k%F{blue}$SEP%f"
+  cpwd="${PWD/#$HOME/~}"
+  echo -n "%F{blue}$cpwd%f "
 }
 
 function prompt_drt_vcs {
-  echo -n "%F{blue}$RSEP%f%K{blue}${vcs_info_msg_0_}%F{black}$RSEP%f%k"
+  echo -n "${vcs_info_msg_0_} "
 }
 
 function prompt_drt_setup {
@@ -45,13 +43,13 @@ function prompt_drt_setup {
   #zstyle ':vcs_info:*' check-for-changes true
   zstyle ':vcs_info:*' use-simple true
   zstyle ':vcs_info:*' unstagedstr ' %F{8}✗%f'
-  zstyle ':vcs_info:*' formats '%F{red}%.2i%f%u%F{black}%b%f'
+  zstyle ':vcs_info:*' formats '%F{red}%.2i%f%u%F{green}%b%f'
   zstyle ':vcs_info:*' actionformats '%F{red}%.7i%f +%a%u'
   zstyle ':vcs_info:git*+set-message:*' hooks git-status
 
   # Define prompts.
   PROMPT='$(comp_info)$(prompt_drt_pwd)'
-  RPROMPT='$(prompt_drt_vcs)%F{yellow}[%D{%L:%M:%S %p}]%f'
+  RPROMPT='$(prompt_drt_vcs)%B%F{yellow}[%D{%L:%M:%S %p}]%f%b'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]?'
 }
 

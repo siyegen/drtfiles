@@ -30,4 +30,25 @@ if [ -d ~/.aliases ]; then
   unset file
 fi
 
+function slknife() { knife "$@" -c ~/.chef/knife.rb_legacy ;}
+function sjcknife() { knife "$@" -c ~/.chef/knife.rb_SJC ;}
+function allknife() {
+echo SJC ...
+knife "$@" -c ~/.chef/knife.rb_SJC
+if [ $? -ne 0 ]; then
+  echo SJC failed
+  return 1
+fi
+echo SoftLayer ...
+knife "$@" -c ~/.chef/knife.rb_legacy
+if [ $? -ne 0 ]; then
+  echo SL failed
+  return 1
+fi
+echo done.
+}
+
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+export RUST_SRC_PATH='/Users/siyegen/dev/rustc-1.7.0/src'
+
+eval "$(direnv hook zsh)"

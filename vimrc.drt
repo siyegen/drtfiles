@@ -26,7 +26,7 @@ Bundle 'tpope/vim-speeddating'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'sjl/gundo.vim'
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'
 Bundle 'bling/vim-airline'
 Bundle 'scrooloose/syntastic'
 
@@ -150,7 +150,7 @@ let g:syntastic_javascript_checkers = ['jshint']
 let g:scala_sort_across_groups=1
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'simple'
+let g:airline_theme = 'murmur'
 
 " ================ Scrolling ========================
 

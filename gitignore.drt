@@ -12,3 +12,5 @@ npm-debug.log/
 npm-debug.log
 venv/
 tmp/
+*.sublime-project
+.envrc
